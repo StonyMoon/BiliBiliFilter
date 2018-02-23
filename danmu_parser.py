@@ -42,7 +42,7 @@ def output_xml(users):
     with open('filter.xml','w') as f:
         f.write('<filters>\n')
         for user in users:
-            f.write('<item enabled="true"> u=')
+            f.write('<item enabled="true">u=')
             f.write(user)
             f.write('</item>\n')
         f.write('</filters>')
@@ -56,8 +56,12 @@ def get_user_by_danmu(url,keyword):
     output_xml(users)
 
 
+print('根据视频中弹幕内容来产生屏蔽名单')
+print('比如屏蔽\'坐飞机\'')
+print('如果有用户在这个视频中发的弹幕含有\'坐飞机\'，则这个用户就会被导入屏蔽列表中')
+av = input('请输入av号(例如 av12345)：')
+key = input('请输入需要屏蔽的关键词：')
+url = 'https://www.bilibili.com/video/' + av
+get_user_by_danmu(url, key)
 
-get_user_by_danmu('https://www.bilibili.com/video/av19856920/','茶')
-
-
-
+input('导出成功，按任意键退出')
