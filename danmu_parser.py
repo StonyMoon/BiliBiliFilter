@@ -10,11 +10,13 @@ class Danmu:
 
 
 def get_danmu_url(url):
-    text = requests.get(url).text
-    soup = pyquery.PyQuery(text)('#bofqi')
-    for each in soup.items():
-        cid = each.text().split('cid=')[1].split('&')[0]
-        return 'https://comment.bilibili.com/' + cid + '.xml'
+    re = requests.get(url).text
+    index = re.find('cid=') + 4
+    i = 0
+    while re[index + i].isdigit():
+        i += 1
+    cid = re[index:index + i]
+    return 'https://comment.bilibili.com/' + cid + '.xml'
 
 
 # 返回弹幕列表
@@ -58,7 +60,7 @@ def get_user_by_danmu(url, keyword):
     url1 = get_danmu_url(url)
     danmu = get_dammu(url1)
     users = get_foolish_user_list(danmu, keyword)
-    output_xml(users)
+    return output_xml(users)
 
 #
 # print('根据视频中弹幕内容来产生屏蔽名单')
