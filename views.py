@@ -23,10 +23,6 @@ def get_xml():
             'danmu.xml'.encode().decode('latin-1'))
         return response
 
-
-
-        return s
-
     return 'aa'
 
 
